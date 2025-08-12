@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Canvas, Rect } from "fabric";
+import { Flex, Text, Button } from "@radix-ui/themes";
 
 const FabricCanvas = () => {
   const canvasRef = useRef(null);
@@ -27,7 +28,16 @@ const FabricCanvas = () => {
     }
   }, []);
 
-  return <canvas ref={canvasRef} width="800px" height="1000px" />;
+  return (
+    <>
+      {" "}
+      <Flex direction="column" gap="2">
+        <Text>Hello from Radix Themes</Text>
+        <Button>Let's go</Button>
+      </Flex>
+      <canvas ref={canvasRef} width="800px" height="1000px" />
+    </>
+  );
 };
 
 export default FabricCanvas;
