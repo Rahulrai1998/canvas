@@ -80,4 +80,7 @@ body {
   border-radius: 4px;
   display: flex;
   margin-bottom: 1rem;
+  Button {
+    cursor: pointer;
+  }
 }
