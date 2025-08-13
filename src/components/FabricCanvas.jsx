@@ -13,21 +13,35 @@ const FabricCanvas = () => {
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState(null);
 
-  // 1. Initialize Canvas
   useEffect(() => {
     const canvasElement = canvasRef.current;
-    if (canvasElement) {
-      const initCanvas = new Canvas(canvasRef.current, {
-        width: 600,
-        height: 600,
+    if (!canvasElement) return;
+
+    const parent = canvasElement.parentElement;
+    if (!parent) return;
+
+    const canvasInstance = new Canvas(canvasElement, {
+      width: parent.offsetWidth,
+      height: parent.offsetHeight,
+    });
+
+    canvasInstance.backgroundColor = "#fff";
+    canvasInstance.renderAll();
+    setCanvas(canvasInstance);
+
+    const handleResize = () => {
+      canvasInstance.setDimensions({
+        width: parent.offsetWidth,
+        height: parent.offsetHeight,
       });
-      initCanvas.backgroundColor = "#fff";
-      initCanvas.renderAll();
-      setCanvas(initCanvas);
-      return () => {
-        initCanvas.dispose();
-      };
-    }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      canvasInstance.dispose();
+    };
   }, []);
 
   // 2. Load scene from Firestore once canvas is ready
@@ -67,12 +81,14 @@ const FabricCanvas = () => {
     canvas.on("object:added", saveCanvas);
     canvas.on("object:modified", saveCanvas);
     canvas.on("object:removed", saveCanvas);
+    canvas.on("object:changed", saveCanvas);
 
     return () => {
       saveCanvas.cancel();
       canvas.off("object:added", saveCanvas);
       canvas.off("object:modified", saveCanvas);
       canvas.off("object:removed", saveCanvas);
+      canvas.on("object:changed", saveCanvas);
     };
   }, [canvas, id]);
 
@@ -84,11 +100,13 @@ const FabricCanvas = () => {
   return (
     <div className="App">
       <Toaster />
-      <ToolBar canvas={canvas} setCanvas={setCanvas} canvasRef={canvasRef} />
-      <canvas id="canvas-elm" ref={canvasRef} />
-      <Button onClick={copyLink} mt={"2"}>
-        Share Canvas
+      <Button onClick={copyLink} mb={"2"}>
+        Copy & Share
       </Button>
+      <ToolBar canvas={canvas} setCanvas={setCanvas} canvasRef={canvasRef} />
+      <div className="canvas-wrapper">
+        <canvas id="canvas-elm" ref={canvasRef} />
+      </div>
     </div>
   );
 };

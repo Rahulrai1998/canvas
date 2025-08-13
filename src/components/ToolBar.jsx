@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@radix-ui/themes";
 import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CircleBackslashIcon,
   CircleIcon,
   Pencil2Icon,
+  ResetIcon,
   SquareIcon,
   TextIcon,
 } from "@radix-ui/react-icons";
@@ -70,6 +74,8 @@ const ToolBar = ({ canvas, setCanvas }) => {
       const activeObject = canvas.getActiveObject();
       if (activeObject) {
         activeObject.set("fill", newColor);
+        canvas.fire("object:changed"); // Force event
+
         canvas.renderAll();
       }
     }
@@ -105,6 +111,12 @@ const ToolBar = ({ canvas, setCanvas }) => {
         defaultValue="#0000ff" // Default color
         onChange={(e) => changeShapeColor(e.target.value)}
       />
+      <Button className="button" onClick={addRectangle}>
+        <ArrowLeftIcon />
+      </Button>
+      <Button className="button" onClick={addRectangle}>
+        <ArrowRightIcon />
+      </Button>
       <Button className="button" onClick={addRectangle}>
         <SquareIcon />
       </Button>
