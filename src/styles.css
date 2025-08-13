@@ -45,8 +45,8 @@ body {
     top: auto;
     flex-direction: row;
     bottom: 3%;
-    /* left: 50%;
-    right: 50%; */
+    left: 3%;
+    right: 3%;
   }
   .button {
     /* width: 100%; */
@@ -58,6 +58,9 @@ body {
   .color-picker {
     width: 100%;
     border: none;
+    @media (max-width: 768px) {
+      width: 50px;
+    }
   }
   &:empty {
     display: none;
@@ -70,7 +73,7 @@ body {
 }
 
 .btn-group {
-  width:fit-content;
+  width: fit-content;
   gap: 8px;
   background-color: white;
   padding: 8px 8px;
