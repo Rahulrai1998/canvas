@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.button {
+  width: max-content;
+}
+
+.App {
+  font-family: sans-sarif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 100px 16px;
+  background-color: #ecebeb;
+  min-height: 100vh;
+  height: 100%;
+}
+
+#canvas {
+  border: 1px solid #f2f2f2;
+  z-index: 2;
+}
+
+.lower-canvas {
+  position: initial !important;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: rgb(52, 52, 52);
+  padding: 8px 8px;
+  border-radius: 4px;
+  position: fixed;
+  top: 50%;
+  left: 16%;
+  .button {
+    cursor: pointer;
+  }
+  &:empty {
+    display: none;
+  }
+}
