@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# 🖌️ Stateless 2D Canvas Editor with Shareable Links
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A lightweight web-based canvas editor built with **React**, **Fabric.js**, and **Firebase Firestore**, allowing users to create and edit shapes/text, draw freely, and share their work via unique public links — no login required.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+### 🎨 Canvas Editing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Add Shapes** — Rectangle, Circle
+- **Add Text** — Editable text with customizable font size and color
+- **Pen Tool** — Freehand drawing with adjustable brush size and color
+- **Move, Resize, Rotate, Delete** objects
+- **Color Editing** — Change fill and stroke colors of selected objects
+- **Keyboard Shortcuts**
+  - `Delete` / `Backspace`: Remove selected object(s)
+- **Object Selection**
+  - Single or multiple object selection
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 💾 Scene Management
 
-### `npm test`
+- **Stateless URL System**
+  - `/` generates a new unique scene ID and redirects to `/canvas/:id`
+  - `/canvas/:id` loads the saved canvas state from Firestore
+- **Auto-Save with Debounce**
+  - Updates are saved to Firestore in real time without excessive writes
+  - Color/style changes also trigger saves
+- **Public Share Link**
+  - Shareable link to allow anyone to edit the same canvas (no login)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📤 Export Options
 
-### `npm run build`
+- **Export as PNG** — High-quality raster image
+- **Export as SVG** — Vector version, editable in design tools
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📱 Responsive Canvas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Canvas resizes automatically to fit the container
+- Maintains background and object placement
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🛠 Technologies Used
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **React** — UI library for building the editor
+- **Fabric.js** — Canvas rendering and object manipulation
+- **Firebase Firestore** — Real-time database for saving/loading canvas states
+- **Lodash** — Debouncing save operations
+- **Radix UI** — Prebuilt accessible components for toolbar and buttons
+- **CSS** — Styling and layout
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📂 Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+src/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+│
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+├── components/
 
-### Code Splitting
+│   ├── FabricCanvas.jsx   # Main canvas component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+│   ├── ToolBar.jsx        # Toolbar with shape, text, pen, export tools
 
-### Analyzing the Bundle Size
+│
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+├── firebase.js            # Firebase config and Firestore instance
 
-### Making a Progressive Web App
+├── App.jsx                 # App routing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+└── index.js                # Entry point
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
+## ⚙️ How It Works
 
-### Deployment
+1. When visiting `/`, a new UUID is generated and the user is redirected to `/canvas/:id`.
+2. The canvas state is stored in Firestore under `scenes/{id}`.
+3. All changes to the canvas (adding, moving, coloring, deleting objects) are auto-saved.
+4. Visiting `/canvas/:id` loads the corresponding state from Firestore.
+5. Users can export their work as PNG or SVG.
+---
+## 📦 Installation & Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+# Clone the repository
+git clone <repo-url>
+cd <repo-folder>
 
-### `npm run build` fails to minify
+# Install dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Run development server
+npm run dev
+```
+
+
+## Possible Future Enhancements
+
+* Snap-to-grid
+* Undo/Redo
+* Templates for quick starts
+* View-only mode (`?viewOnly=true`)
+* Object locking/unlocking
