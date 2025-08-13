@@ -17,8 +17,8 @@ body {
   flex-direction: column;
   padding: 100px 16px;
   background-color: #fae5ce;
-  /* min-height: 100vh;
-  height: 100%; */
+  min-height: 100vh;
+  height: 100%;
 }
 
 #canvas-elm {
@@ -46,11 +46,13 @@ body {
     flex-direction: row;
     bottom: 3%;
     left: 50%;
+    right: 50%;
   }
   .button {
+    /* width: 100%; */
     cursor: pointer;
-    background-color: #fae5ce;
-    color: black;
+    font-weight: 700;
+
     margin-right: auto;
   }
   .color-picker {
@@ -65,4 +67,11 @@ body {
 .canvas-wrapper {
   width: 80vw;
   height: 70vh; /* or any responsive height you want */
+}
+
+.btn-group {
+  width: 100%;
+  gap: 5px;
+  display: flex;
+  margin-bottom: 1rem;
 }

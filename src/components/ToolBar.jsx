@@ -5,6 +5,7 @@ import {
   ArrowRightIcon,
   CircleBackslashIcon,
   CircleIcon,
+  DownloadIcon,
   Pencil2Icon,
   ResetIcon,
   SquareIcon,
@@ -111,6 +112,7 @@ const ToolBar = ({ canvas, setCanvas }) => {
         defaultValue="#0000ff" // Default color
         onChange={(e) => changeShapeColor(e.target.value)}
       />
+
       <Button className="button" onClick={addRectangle}>
         <ArrowLeftIcon />
       </Button>

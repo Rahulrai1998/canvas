@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { debounce } from "lodash";
 import { Button, Text } from "@radix-ui/themes";
 import toast, { Toaster } from "react-hot-toast";
+import { DownloadIcon } from "@radix-ui/react-icons";
 
 const FabricCanvas = () => {
   const { id } = useParams();
@@ -96,15 +97,43 @@ const FabricCanvas = () => {
     navigator.clipboard.writeText(window.location.href);
     toast.success(<Text weight="bold">Link copied!</Text>);
   };
+  const exportPNG = () => {
+    if (!canvas) return;
+    const dataURL = canvas.toDataURL({ format: "png", quality: 1.0 });
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "canvas.png";
+    link.click();
+  };
 
+  const exportSVG = () => {
+    if (!canvas) return;
+    const svgData = canvas.toSVG();
+    const blob = new Blob([svgData], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "canvas.svg";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
   return (
     <div className="App">
       <Toaster />
-      <Button onClick={copyLink} mb={"2"}>
-        Copy & Share
-      </Button>
+
       <ToolBar canvas={canvas} setCanvas={setCanvas} canvasRef={canvasRef} />
       <div className="canvas-wrapper">
+        <div className="btn-group">
+          <Button onClick={copyLink}>
+            Copy & Share
+          </Button>
+          <Button onClick={exportPNG} title="Export as PNG">
+            <DownloadIcon /> PNG
+          </Button>
+          <Button onClick={exportSVG} title="Export as SVG">
+            <DownloadIcon /> SVG
+          </Button>
+        </div>
         <canvas id="canvas-elm" ref={canvasRef} />
       </div>
     </div>
