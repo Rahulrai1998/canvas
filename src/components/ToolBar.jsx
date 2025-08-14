@@ -112,13 +112,13 @@ const ToolBar = ({ canvas, setCanvas }) => {
         defaultValue="#0000ff" // Default color
         onChange={(e) => changeShapeColor(e.target.value)}
       />
-
+{/* 
       <Button className="button" onClick={addRectangle}>
         <ArrowLeftIcon />
       </Button>
       <Button className="button" onClick={addRectangle}>
         <ArrowRightIcon />
-      </Button>
+      </Button> */}
       <Button className="button" onClick={addRectangle}>
         <SquareIcon />
       </Button>
