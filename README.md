@@ -2,7 +2,7 @@
 
 A lightweight web-based canvas editor built with **React**, **Fabric.js**, and **Firebase Firestore**, allowing users to create and edit shapes/text, draw freely, and share their work via unique public links — no login required.
 
-live-demo: [canvas](https://canvas-mini.vercel.app/canvas/d1104d79-dc0d-4264-8572-61a875cf7c0e)
+live-demo: [canvas](https://canvas-gules.vercel.app/)
 
 ---
 
