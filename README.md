@@ -2,6 +2,8 @@
 
 A lightweight web-based canvas editor built with **React**, **Fabric.js**, and **Firebase Firestore**, allowing users to create and edit shapes/text, draw freely, and share their work via unique public links — no login required.
 
+live-demo: [canvas](canvas-mini.vercel.app)
+
 ---
 
 ## 🚀 Features
@@ -54,7 +56,6 @@ A lightweight web-based canvas editor built with **React**, **Fabric.js**, and *
 
 ## 📂 Project Structure
 
-
 src/
 
 │
@@ -73,8 +74,8 @@ src/
 
 └── index.js                # Entry point
 
-
 ---
+
 ## ⚙️ How It Works
 
 1. When visiting `/`, a new UUID is generated and the user is redirected to `/canvas/:id`.
@@ -82,7 +83,9 @@ src/
 3. All changes to the canvas (adding, moving, coloring, deleting objects) are auto-saved.
 4. Visiting `/canvas/:id` loads the corresponding state from Firestore.
 5. Users can export their work as PNG or SVG.
+
 ---
+
 ## 📦 Installation & Setup
 
 ```bash
@@ -96,7 +99,6 @@ npm install
 # Run development server
 npm run dev
 ```
-
 
 ## Possible Future Enhancements
 
